@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <assert.h>
 
 int main(int argc, char const *argv[])
 {
@@ -7,7 +9,7 @@ int main(int argc, char const *argv[])
     char after[69];
     char temp;
 
-    printf("Entrez votre chaine");
+    printf("Entrez votre chaine: ");
     scanf("%s", &before);
 
     for (int i = 0; before[i] != '\0'; i++){
@@ -28,6 +30,29 @@ int main(int argc, char const *argv[])
         after[i] = temp;  
         after[i + 1] = '\0';
     }
-    printf("La chaine cryptee est: %s", after);
+
+    
+    printf("La chaine cryptee est: %s \n", after);
+
+ for (int i = 0; after[i] != '\0'; i++){
+
+        temp = after[i];
+        for (int j = 0; j < DECALAGE; j++){
+            temp--;
+            //65 = A majuscule
+            if (temp == 64 ){       
+                temp = 'Z';
+            }
+            //97 = a minuscule 
+            else if (temp == 96) 
+            {
+                temp = 'z';
+            } 
+        }
+        after[i] = temp;  
+    }
+
+    assert(strcmp(before, after) == 0);
+    printf("%d", strcmp(before, after));
     return 0;
 }
